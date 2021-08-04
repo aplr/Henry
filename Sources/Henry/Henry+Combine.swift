@@ -23,7 +23,7 @@ extension PublisherJob {
     func handle(completion: @escaping (Henry.Result) -> Void) -> JobCancellable {
         let cancellable = pipeline.sink(receiveCompletion: {
             switch $0 {
-            case let .failure(error): completion(.failed(error))
+            case let .failure(error): completion(.failure(error))
             case .finished: completion(.success)
             }
         }, receiveValue: { _ in })

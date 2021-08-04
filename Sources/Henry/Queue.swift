@@ -59,7 +59,7 @@ open class Queue {
     }
     
     public static func register(jobs: [Job.Type]) {
-        jobs.forEach({ Self.register($0) })
+        jobs.forEach({ Self.register(job: $0) })
     }
     
     public struct Connection: Hashable, CustomStringConvertible {
