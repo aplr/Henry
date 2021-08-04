@@ -23,8 +23,6 @@ public protocol Job: Codable {
     var earliestBeginTime: Date? { get }
     
     var expirationTime: Date? { get }
-    
-    var priority: Henry.Priority { get }
         
     func handle(completion: (Henry.Result) -> Void) -> JobCancellable
         
@@ -57,10 +55,6 @@ extension Job {
     
     var expirationTime: Date? {
         nil
-    }
-    
-    var priority: Henry.Priority {
-        .normal
     }
     
     func jobDidSucceed() {

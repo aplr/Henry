@@ -38,13 +38,6 @@ public struct Henry {
         }
     }
     
-    public enum Priority {
-        case low
-        case normal
-        case high
-        case custom(Int)
-    }
-    
     public enum Error: Swift.Error {
         case jobNotRegistered
         case queueAlreadyActive

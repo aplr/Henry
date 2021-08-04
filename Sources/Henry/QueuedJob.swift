@@ -86,10 +86,6 @@ open class QueuedJob: Job, QueueIdentifiable, Equatable {
         job.expirationTime
     }
     
-    public var priority: Henry.Priority {
-        job.priority
-    }
-    
     public func handle(completion: (Henry.Result) -> Void) -> JobCancellable {
         job.handle(completion: completion)
     }
@@ -106,7 +102,7 @@ open class QueuedJob: Job, QueueIdentifiable, Equatable {
         case id, job, jobType, tries, state
     }
     
-    public enum State: Codable {
+    public enum State: String, Codable {
         case created
         case queued
         case running
