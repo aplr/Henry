@@ -67,7 +67,11 @@ struct SendMessageJob: Job {
     }
 
     func handle(completion: (Henry.Result) -> Void) -> JobCancellable {
-        let request = AF.request("https://httpbin.org/post", method: .post, parameters: message)
+        let request = AF.request(
+            "https://httpbin.org/post",
+            method: .post,
+            parameters: message
+        )
 
         // When the request completes, be sure to call the completion
         // handler with either a success or failure result
