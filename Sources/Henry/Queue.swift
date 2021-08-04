@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 open class Queue {
     
     public static let `default` = Queue()
