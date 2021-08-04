@@ -8,6 +8,45 @@
 import Pillarbox
 import Foundation
 
-protocol Task {
+public struct Henry {
     
+    static var `shared` = Henry()
+    
+    public enum FailReason {
+        case error(_ error: Swift.Error)
+        case expired
+        case timeout
+        case cancelled
+        case dependencyFailed
+        case tooManyTries
+    }
+    
+    public enum FailAction {
+        case release
+        case drop
+    }
+    
+    public enum Result {
+        case success
+        case failed(_ error: Swift.Error? = nil)
+        
+        var isSuccess: Bool {
+            switch self {
+            case .success: return true
+            case .failed(_): return false
+            }
+        }
+    }
+    
+    public enum Priority {
+        case low
+        case normal
+        case high
+        case custom(Int)
+    }
+    
+    public enum Error: Swift.Error {
+        case jobNotRegistered
+        case queueAlreadyActive
+    }
 }
