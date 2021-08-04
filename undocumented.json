@@ -1,0 +1,460 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 11,
+      "symbol": "Henry",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 15,
+      "symbol": "Henry.FailReason",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 16,
+      "symbol": "Henry.FailReason.error(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 17,
+      "symbol": "Henry.FailReason.expired",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 18,
+      "symbol": "Henry.FailReason.timeout",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 19,
+      "symbol": "Henry.FailReason.cancelled",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 20,
+      "symbol": "Henry.FailReason.dependencyFailed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 21,
+      "symbol": "Henry.FailReason.tooManyTries",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 24,
+      "symbol": "Henry.FailAction",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 25,
+      "symbol": "Henry.FailAction.release",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 26,
+      "symbol": "Henry.FailAction.drop",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 29,
+      "symbol": "Henry.Result",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 30,
+      "symbol": "Henry.Result.success",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 31,
+      "symbol": "Henry.Result.failed(_:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 41,
+      "symbol": "Henry.Error",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 42,
+      "symbol": "Henry.Error.jobNotRegistered",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
+      "line": 43,
+      "symbol": "Henry.Error.queueAlreadyActive",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 11,
+      "symbol": "JobCancellable",
+      "symbol_kind": "source.lang.swift.decl.typealias",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 13,
+      "symbol": "Job",
+      "symbol_kind": "source.lang.swift.decl.protocol",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 15,
+      "symbol": "Job.shouldContinueInBackground",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 17,
+      "symbol": "Job.maxTries",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 19,
+      "symbol": "Job.retryUntil",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 21,
+      "symbol": "Job.timeout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 23,
+      "symbol": "Job.earliestBeginTime",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 25,
+      "symbol": "Job.expirationTime",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 27,
+      "symbol": "Job.handle(completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 29,
+      "symbol": "Job.jobDidSucceed()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Job.swift",
+      "line": 31,
+      "symbol": "Job.jobDidFail(reason:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 10,
+      "symbol": "Queue",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 12,
+      "symbol": "Queue.default",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 44,
+      "symbol": "Queue.dispatch(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 48,
+      "symbol": "Queue.run()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 52,
+      "symbol": "Queue.register(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 61,
+      "symbol": "Queue.register(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 65,
+      "symbol": "Queue.Connection",
+      "symbol_kind": "source.lang.swift.decl.struct",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 67,
+      "symbol": "Queue.Connection.default",
+      "symbol_kind": "source.lang.swift.decl.var.static",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 69,
+      "symbol": "Queue.Connection.name",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 70,
+      "symbol": "Queue.Connection.mode",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 71,
+      "symbol": "Queue.Connection.qos",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 90,
+      "symbol": "Queue.Mode",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 91,
+      "symbol": "Queue.Mode.serial",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 92,
+      "symbol": "Queue.Mode.blocking",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 93,
+      "symbol": "Queue.Mode.concurrent(max:)",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 103,
+      "symbol": "Queue.Qos",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 104,
+      "symbol": "Queue.Qos.high",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 105,
+      "symbol": "Queue.Qos.default",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
+      "line": 106,
+      "symbol": "Queue.Qos.background",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 11,
+      "symbol": "QueuedJob",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 18,
+      "symbol": "QueuedJob.tries",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 19,
+      "symbol": "QueuedJob.state",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 65,
+      "symbol": "QueuedJob.shouldContinueInBackground",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 69,
+      "symbol": "QueuedJob.maxTries",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 73,
+      "symbol": "QueuedJob.retryUntil",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 77,
+      "symbol": "QueuedJob.timeout",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 81,
+      "symbol": "QueuedJob.earliestBeginTime",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 85,
+      "symbol": "QueuedJob.expirationTime",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 89,
+      "symbol": "QueuedJob.handle(completion:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 93,
+      "symbol": "QueuedJob.jobDidSucceed()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 97,
+      "symbol": "QueuedJob.jobDidFail(reason:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 105,
+      "symbol": "QueuedJob.State",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 106,
+      "symbol": "QueuedJob.State.created",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 107,
+      "symbol": "QueuedJob.State.queued",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 108,
+      "symbol": "QueuedJob.State.running",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 109,
+      "symbol": "QueuedJob.State.succeded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/QueuedJob.swift",
+      "line": 110,
+      "symbol": "QueuedJob.State.failed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/runner/work/Henry/Henry"
+}
