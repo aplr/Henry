@@ -43,7 +43,7 @@ class QueueRunner {
         return Pillarbox<QueuedJob>(name: "\(name)", url: url)
     }()
     
-    func continue() {
+    func run() {
         for job in pillarbox.elements {
             enqueue(job)
         }
