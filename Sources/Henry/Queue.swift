@@ -49,7 +49,7 @@ open class Queue {
         queueRunner.run()
     }
     
-    public static func register(_ job: Job.Type) {
+    public static func register(job: Job.Type) {
         guard jobRegistry["\(job.self)"] == nil else {
             print("Henry: Job already registered - \(job.self)")
             return
@@ -58,7 +58,7 @@ open class Queue {
         jobRegistry["\(job.self)"] = job
     }
     
-    public static func register(_ jobs: [Job.Type]) {
+    public static func register(jobs: [Job.Type]) {
         jobs.forEach({ Self.register($0) })
     }
     

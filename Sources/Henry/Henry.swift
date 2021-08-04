@@ -28,18 +28,17 @@ public struct Henry {
     
     public enum Result {
         case success
-        case failed(_ error: Swift.Error? = nil)
+        case failure(_ error: Swift.Error? = nil)
         
         var isSuccess: Bool {
             switch self {
             case .success: return true
-            case .failed(_): return false
+            case .failure(_): return false
             }
         }
     }
     
     public enum Error: Swift.Error {
         case jobNotRegistered
-        case queueAlreadyActive
     }
 }
