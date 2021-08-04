@@ -1,5 +1,5 @@
 <h1>
-    <img src="https://raw.githubusercontent.com/aplr/Henry/main/Logo.png?token=AAIAWBDNQRUM6JJJWSYHN43ASPZJS" height="23" />
+    <img src="https://raw.githubusercontent.com/aplr/Henry/main/Logo.png" height="23" />
     Henry
 </h1>
 
