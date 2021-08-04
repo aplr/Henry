@@ -31,7 +31,7 @@ public protocol Job: Codable {
     func jobDidFail(reason: Henry.FailReason) -> Henry.FailAction
 }
 
-extension Job {
+public extension Job {
     
     var shouldContinueInBackground: Bool {
         false
