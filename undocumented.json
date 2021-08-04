@@ -94,7 +94,7 @@
     {
       "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
       "line": 31,
-      "symbol": "Henry.Result.failed(_:)",
+      "symbol": "Henry.Result.failure(_:)",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
@@ -109,13 +109,6 @@
       "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
       "line": 42,
       "symbol": "Henry.Error.jobNotRegistered",
-      "symbol_kind": "source.lang.swift.decl.enumelement",
-      "warning": "undocumented"
-    },
-    {
-      "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Henry.swift",
-      "line": 43,
-      "symbol": "Henry.Error.queueAlreadyActive",
       "symbol_kind": "source.lang.swift.decl.enumelement",
       "warning": "undocumented"
     },
@@ -227,14 +220,14 @@
     {
       "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
       "line": 52,
-      "symbol": "Queue.register(_:)",
+      "symbol": "Queue.register(job:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },
     {
       "file": "/Users/runner/work/Henry/Henry/Sources/Henry/Queue.swift",
       "line": 61,
-      "symbol": "Queue.register(_:)",
+      "symbol": "Queue.register(jobs:)",
       "symbol_kind": "source.lang.swift.decl.function.method.static",
       "warning": "undocumented"
     },

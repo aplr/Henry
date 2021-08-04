@@ -116,17 +116,17 @@
           <div class="section-content top-matter">
             
             <h1>
-    <img src="https://raw.githubusercontent.com/aplr/Henry/main/Logo.png?token=AAIAWBDNQRUM6JJJWSYHN43ASPZJS" height="23" />
+    <img src="https://raw.githubusercontent.com/aplr/Henry/main/Logo.png" height="23" />
     Henry
 </h1>
 
 <p><img src="https://github.com/aplr/Henry/workflows/Build/badge.svg?branch=main" alt="Build">
 <img src="https://github.com/aplr/Henry/workflows/Documentation/badge.svg" alt="Documentation"></p>
 
-<p>Henry is an easy-to-use, object-based queue with support for iOS, tvOS and macOS, written purely in Swift. Push and pop operations are both in O(1). All writes are synchronous - this means data will be written to the disk before an operation returns. Furthermore, all operations are thread-safe and synchronized using a read-write lock. This allows for synchronized, concurrent access to read-operations while performing writes in serial.</p>
+<p>Henry is an easy-to-use, declarative and persistent job queue with support for iOS, tvOS and macOS, written purely in Swift. It is built upon Foundation&rsquo;s <a href="https://developer.apple.com/documentation/foundation/operationqueue">OperationQueue</a> and supports serial, concurrent as well as blocking queues. For persisting the queue&rsquo;s internal state, Henry uses <a href="https://github.com/aplr/Pillarbox">Pillarbox</a>, which is an object-based queue working directly on the filesystem.</p>
 <h2 id='about-henry' class='heading'>About Henry</h2>
 
-<p>Henry was originally conceived as a simple object queue that allows to persist unsent messages locally in an efficient and simple way which outlasts app crashes and restarts. For its storage layer, Henry makes use of Pinterest&rsquo;s excellent <a href="https://github.com/pinterest/PINCache">PINCache</a>, which is a key/value store designed for persisting temporary objects on the disk. Beyond that, the <a href="https://swift.org/blog/swift-collections/#deque">Deque</a> data structure from Apple&rsquo;s open source <a href="https://github.com/apple/swift-collections">swift-collections</a> library is used in the internal realization of the queue.</p>
+<p>Henry was originally conceived as a task queue that allows to persist unsent chat messages locally in an efficient and simple way which outlasts app crashes and restarts. In its persistence layer, Henry makes use of <a href="https://github.com/aplr/Pillarbox">Pillarbox</a>, which is an object-based key/value store also providing queue operations, designed for persisting temporary objects on the disk.</p>
 <h2 id='installation' class='heading'>Installation</h2>
 
 <p>Henry is available via the <a href="https://swift.org/package-manager/">Swift Package Manager</a> which is a tool for managing the distribution of Swift code. It’s integrated with the Swift build system and automates the process of downloading, compiling, and linking dependencies.</p>
@@ -141,41 +141,99 @@
 </code></pre>
 <h2 id='usage' class='heading'>Usage</h2>
 
-<p>As a bare minimum, you have to specify the name of the Henry which determines the queue file name, as well as the directory where the queue file is stored.</p>
+<p>Let&rsquo;s say you want to send chat messages, which is usually an error-prone task due to bad network conditions and other factors. Furthermore, you might want to send them in a strict order and cancel sending subsequent messages if one of them fails. This is exactly what you can use Henry for.</p>
+
+<p>We start with a very simple message object we want to send. As jobs and their data is persisted, we have to conform to the <code>Codable</code> protocol.</p>
+<pre class="highlight swift"><code><span class="kd">struct</span> <span class="kt">Message</span><span class="p">:</span> <span class="kt">Codable</span> <span class="p">{</span>
+    <span class="k">let</span> <span class="nv">id</span><span class="p">:</span> <span class="kt">UUID</span>
+    <span class="k">let</span> <span class="nv">sender</span><span class="p">:</span> <span class="kt">String</span>
+    <span class="k">let</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Next, we define a <code>SendMessageJob</code> which conforms to the <code><a href="Protocols/Job.html">Job</a></code> protocol. It encapsulates our message to send and allows to define metadata like the maximum retries in case of failures and the job timeout. When the job is processed by the queue, the <code>handle</code> method is invoked, which is the place to implement your processing code. If the job succeeds, the <code>jobDidSucceed</code> method will be called, <code>jobDidFail(reason:)</code> otherwise.</p>
 <pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Henry</span>
 
-<span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">fileURLWithPath</span><span class="p">:</span> <span class="s">"/path/to/your/app"</span><span class="p">,</span> <span class="nv">isDirectory</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+<span class="kd">struct</span> <span class="kt">SendMessageJob</span><span class="p">:</span> <span class="kt">Job</span> <span class="p">{</span>
 
-<span class="k">let</span> <span class="nv">Henry</span> <span class="o">=</span> <span class="kt">Henry</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">(</span><span class="nv">name</span><span class="p">:</span> <span class="s">"messages"</span><span class="p">,</span> <span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">)</span>
+    <span class="c1">// The message to send</span>
+    <span class="k">let</span> <span class="nv">message</span><span class="p">:</span> <span class="kt">Message</span>
 
-<span class="kt">Henry</span><span class="o">.</span><span class="nf">push</span><span class="p">(</span><span class="s">"Hello"</span><span class="p">)</span>
-<span class="kt">Henry</span><span class="o">.</span><span class="nf">push</span><span class="p">(</span><span class="s">"World"</span><span class="p">)</span>
+    <span class="c1">// The queue will retry the job three</span>
+    <span class="c1">// times on failure.</span>
+    <span class="k">var</span> <span class="nv">maxTries</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span>
+        <span class="mi">3</span>
+    <span class="p">}</span>
 
-<span class="nf">print</span><span class="p">(</span><span class="kt">Henry</span><span class="o">.</span><span class="n">count</span><span class="p">)</span>   <span class="c1">// 2</span>
+    <span class="c1">// The job will be cancelled if it runs</span>
+    <span class="c1">// longer than this number of seconds.</span>
+    <span class="k">var</span> <span class="nv">timeout</span><span class="p">:</span> <span class="kt">Int</span> <span class="p">{</span>
+        <span class="mi">16</span>
+    <span class="p">}</span>
 
-<span class="nf">print</span><span class="p">(</span><span class="kt">Henry</span><span class="o">.</span><span class="nf">pop</span><span class="p">())</span>   <span class="c1">// "Hello"</span>
-<span class="nf">print</span><span class="p">(</span><span class="kt">Henry</span><span class="o">.</span><span class="nf">pop</span><span class="p">())</span>   <span class="c1">// "World"</span>
+    <span class="kd">func</span> <span class="nf">handle</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="p">(</span><span class="kt">Henry</span><span class="o">.</span><span class="kt">Result</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Void</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">JobCancellable</span> <span class="p">{</span>
+        <span class="k">let</span> <span class="nv">request</span> <span class="o">=</span> <span class="kt">AF</span><span class="o">.</span><span class="nf">request</span><span class="p">(</span><span class="s">"https://httpbin.org/post"</span><span class="p">,</span> <span class="nv">method</span><span class="p">:</span> <span class="o">.</span><span class="n">post</span><span class="p">,</span> <span class="nv">parameters</span><span class="p">:</span> <span class="n">message</span><span class="p">)</span>
 
-<span class="nf">print</span><span class="p">(</span><span class="kt">Henry</span><span class="o">.</span><span class="n">isEmpty</span><span class="p">)</span> <span class="c1">// true</span>
+        <span class="c1">// When the request completes, be sure to call the completion</span>
+        <span class="c1">// handler with either a success or failure result</span>
+        <span class="n">request</span><span class="o">.</span><span class="nf">validate</span><span class="p">()</span><span class="o">.</span><span class="n">response</span> <span class="p">{</span> <span class="n">response</span> <span class="k">in</span>
+            <span class="k">switch</span> <span class="n">response</span><span class="o">.</span><span class="n">result</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="o">.</span><span class="nv">success</span><span class="p">:</span> <span class="nf">completion</span><span class="p">(</span><span class="o">.</span><span class="n">success</span><span class="p">)</span>
+            <span class="k">case</span> <span class="kd">let</span> <span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="n">error</span><span class="p">):</span> <span class="nf">completion</span><span class="p">(</span><span class="o">.</span><span class="nf">failure</span><span class="p">(</span><span class="n">error</span><span class="p">))</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="c1">// Provide a cancel function which allows cancelling the asynchronous operation.</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="n">request</span><span class="o">.</span><span class="nf">cancel</span><span class="p">()</span> <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">jobDidSucceed</span><span class="p">()</span> <span class="p">{</span>
+        <span class="kt">MessageService</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">markAsSent</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="p">}</span>
+
+    <span class="kd">func</span> <span class="nf">jobDidFail</span><span class="p">(</span><span class="nv">reason</span><span class="p">:</span> <span class="kt">Henry</span><span class="o">.</span><span class="kt">FailReason</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Henry</span><span class="o">.</span><span class="kt">FailAction</span> <span class="p">{</span>
+        <span class="kt">MessageService</span><span class="o">.</span><span class="n">shared</span><span class="o">.</span><span class="nf">markAsFailed</span><span class="p">(</span><span class="n">message</span><span class="p">)</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre>
-<h3 id='going-lifo' class='heading'>Going LIFO</h3>
 
-<p>Henry uses a FIFO queue internally per default. If you want to change that behaviour to LIFO, pass a customized <code>HenryConfiguration</code> object with the strategy adjusted like below.</p>
-<pre class="highlight swift"><code><span class="k">let</span> <span class="nv">url</span> <span class="o">=</span> <span class="kt">URL</span><span class="p">(</span><span class="nv">fileURLWithPath</span><span class="p">:</span> <span class="s">"/path/to/your/app"</span><span class="p">,</span> <span class="nv">isDirectory</span><span class="p">:</span> <span class="kc">true</span><span class="p">)</span>
+<p>In order to deserialize persisted jobs, we have to register our newly created <code>SendMessageJob</code> on the queue. Then, you can continue processing the persisted jobs of your queue by calling it&rsquo;s <code>run</code> function. Your AppDelegate&rsquo;s <code>application(_:didFinishLaunchingWithOptions:)</code> is a good place to put this.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Henry</span>
 
-<span class="k">let</span> <span class="nv">configuration</span> <span class="o">=</span> <span class="kt">HenryConfiguration</span><span class="p">(</span><span class="nv">strategy</span><span class="p">:</span> <span class="o">.</span><span class="n">lifo</span><span class="p">)</span>
+<span class="kd">class</span> <span class="kt">AppDelegate</span><span class="p">:</span> <span class="kt">UIApplicationDelegate</span> <span class="p">{</span>
 
-<span class="k">let</span> <span class="nv">Henry</span> <span class="o">=</span> <span class="kt">Henry</span><span class="o">&lt;</span><span class="kt">String</span><span class="o">&gt;</span><span class="p">(</span>
-    <span class="nv">name</span><span class="p">:</span> <span class="s">"messages"</span><span class="p">,</span>
-    <span class="nv">url</span><span class="p">:</span> <span class="n">url</span><span class="p">,</span>
-    <span class="nv">configuration</span><span class="p">:</span> <span class="n">configuration</span>
-<span class="p">)</span>
+    <span class="kd">func</span> <span class="nf">application</span><span class="p">(</span>
+        <span class="n">_</span> <span class="nv">application</span><span class="p">:</span> <span class="kt">UIApplication</span><span class="p">,</span>
+        <span class="n">didFinishLaunchingWithOptions</span> <span class="nv">launchOptions</span><span class="p">:</span> <span class="p">[</span><span class="kt">UIApplication</span><span class="o">.</span><span class="kt">LaunchOptionsKey</span><span class="p">:</span> <span class="kt">Any</span><span class="p">]?</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">Bool</span> <span class="p">{</span>
+        <span class="kt">Queue</span><span class="o">.</span><span class="nf">register</span><span class="p">(</span><span class="nv">job</span><span class="p">:</span> <span class="kt">SendMessageJob</span><span class="o">.</span><span class="k">self</span><span class="p">)</span>
 
-<span class="c1">// ...</span>
+        <span class="c1">// Crea</span>
+        <span class="k">let</span> <span class="nv">connection</span> <span class="o">=</span> <span class="kt">Queue</span><span class="o">.</span><span class="kt">Connection</span><span class="p">(</span><span class="s">"io.aplr.henry.queue.demo-1"</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">blocking</span><span class="p">)</span>
+
+        <span class="kt">Queue</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span><span class="o">.</span><span class="nf">run</span><span class="p">()</span>
+
+        <span class="k">return</span> <span class="kc">true</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>Finally, we can dispatch our <code>SendMessageJob</code> to our queue. Just create a queue connection and use it to dispatch a job.</p>
+<pre class="highlight swift"><code><span class="kd">import</span> <span class="kt">Henry</span>
+
+<span class="k">let</span> <span class="nv">connection</span> <span class="o">=</span> <span class="kt">Queue</span><span class="o">.</span><span class="kt">Connection</span><span class="p">(</span><span class="s">"io.aplr.henry.queue.demo-1"</span><span class="p">,</span> <span class="nv">mode</span><span class="p">:</span> <span class="o">.</span><span class="n">blocking</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">queue</span> <span class="o">=</span> <span class="kt">Queue</span><span class="p">(</span><span class="n">connection</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">message</span> <span class="o">=</span> <span class="kt">Message</span><span class="p">(</span><span class="nv">id</span><span class="p">:</span> <span class="kt">UUID</span><span class="p">(),</span> <span class="nv">sender</span><span class="p">:</span> <span class="s">"John Doe"</span><span class="p">,</span> <span class="nv">text</span><span class="p">:</span> <span class="s">"Hello World!"</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">job</span> <span class="o">=</span> <span class="kt">SendMessageJob</span><span class="p">(</span><span class="nv">message</span><span class="p">:</span> <span class="n">message</span><span class="p">)</span>
+
+<span class="k">let</span> <span class="nv">queuedJob</span> <span class="o">=</span> <span class="n">queue</span><span class="o">.</span><span class="nf">dispatch</span><span class="p">(</span><span class="n">job</span><span class="p">)</span>
 </code></pre>
 <h2 id='documentation' class='heading'>Documentation</h2>
 
-<p>Documentation is available <a href="https://Henry.aplr.io">here</a> and provides a comprehensive documentation of the library&rsquo;s public interface. Expect usage examples and guides to be added shortly.</p>
+<p>Documentation is available <a href="https://henry.aplr.io">here</a> and provides a comprehensive documentation of the library&rsquo;s public interface. Expect usage examples and guides to be added shortly.</p>
 <h2 id='license' class='heading'>License</h2>
 
 <p>Henry is licensed under the <a href="https://github.com/aplr/Henry/blob/main/LICENSE">MIT License</a>.</p>
