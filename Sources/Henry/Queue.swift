@@ -33,7 +33,7 @@ open class Queue {
         
     let connection: Connection
     
-    init(_ connection: Connection = .default) {
+    public init(_ connection: Connection = .default) {
         self.connection = connection
     }
     
@@ -70,7 +70,7 @@ open class Queue {
         public let mode: Queue.Mode
         public let qos: Queue.Qos
         
-        init(_ name: String, mode: Queue.Mode = .serial, qos: Queue.Qos = .default) {
+        public init(_ name: String, mode: Queue.Mode = .serial, qos: Queue.Qos = .default) {
             self.name = name
             self.mode = mode
             self.qos = qos
