@@ -41,6 +41,7 @@ open class Queue {
         Self.queueRegistry.removeValue(forKey: connection)
     }
     
+    @discardableResult
     public func dispatch<J: Job>(_ job: J) -> QueuedJob {
         queueRunner.dispatch(job)
     }
