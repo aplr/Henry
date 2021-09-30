@@ -18,7 +18,7 @@ let package = Package(
     dependencies: [
         .package(
             url: "https://github.com/aplr/Pillarbox",
-            from: "1.0.1"
+            from: "1.0.8"
         )
     ],
     targets: [
